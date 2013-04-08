@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="Hik.Samples.Scs.IrcChat.Controls.UserCardControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="300">
+    <Border Margin="0,0,5,5" Cursor="Hand">
+        <Border.Style>
+            <Style>
+                <Style.Setters>
+                    <Setter Property="Border.BorderThickness" Value="1"></Setter>
+                    <Setter Property="Border.BorderBrush" Value="#FF878383"></Setter>
+                    <Setter Property="Border.CornerRadius" Value="6"></Setter>
+                    <Setter Property="Border.Background" Value="#FF111111" />
+                </Style.Setters>
+                <Style.Triggers>
+                    <Trigger Property="Border.IsMouseOver" Value="False">
+                        <Setter Property="Border.Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                    <GradientStop Offset="0" Color="#FF393939"/>
+                                    <GradientStop Offset="1" Color="Black"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                    <Trigger Property="Border.IsMouseOver" Value="True">
+                        <Setter Property="Border.Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                    <GradientStop Offset="0" Color="#FF696767"/>
+                                    <GradientStop Offset="1" Color="#FF3B3B3B"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Margin="3" Grid.Column="0" BorderThickness="1" Background="#FF272626">
+                <Image Stretch="UniformToFill" Source="/ChatClientApp;component/Images/user_male.png" Name="imgAvatar" />
+            </Border>            
+            <StackPanel Grid.Column="1">
+                <Label Content="User Nick" Foreground="White" Height="Auto" Padding="2" Name="lblNick" Margin="3,1"></Label>
+                <Label Content="Available" Foreground="#FF2BE400" Padding="2" Name="lblStatus" Margin="3,0"></Label>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

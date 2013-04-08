@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0DC81B09-3ABF-4BB3-8C08-4E8EE4432BDC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hik</RootNamespace>
+    <AssemblyName>Scs</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Scs.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Scs.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections\ThreadSafeSortedList.cs" />
+    <Compile Include="Communication\ScsServices\Client\IScsServiceClient.cs" />
+    <Compile Include="Communication\ScsServices\Client\ScsServiceClient.cs" />
+    <Compile Include="Communication\ScsServices\Client\ScsServiceClientBuilder.cs" />
+    <Compile Include="Communication\ScsServices\Communication\AutoConnectRemoteInvokeProxy.cs" />
+    <Compile Include="Communication\ScsServices\Communication\Messages\ScsRemoteException.cs" />
+    <Compile Include="Communication\ScsServices\Communication\Messages\ScsRemoteInvokeMessage.cs" />
+    <Compile Include="Communication\ScsServices\Communication\Messages\ScsRemoteInvokeReturnMessage.cs" />
+    <Compile Include="Communication\ScsServices\Communication\RemoteInvokeProxy.cs" />
+    <Compile Include="Communication\Scs\Communication\Messengers\RequestReplyMessenger.cs" />
+    <Compile Include="Communication\ScsServices\Service\IScsServiceApplication.cs" />
+    <Compile Include="Communication\ScsServices\Service\IScsServiceClient.cs" />
+    <Compile Include="Communication\ScsServices\Service\ScsService.cs" />
+    <Compile Include="Communication\ScsServices\Service\ScsServiceApplication.cs" />
+    <Compile Include="Communication\ScsServices\Service\ScsServiceAttribute.cs" />
+    <Compile Include="Communication\ScsServices\Service\ScsServiceBuilder.cs" />
+    <Compile Include="Communication\ScsServices\Service\ScsServiceClient.cs" />
+    <Compile Include="Communication\ScsServices\Service\ScsServiceClientFactory.cs" />
+    <Compile Include="Communication\ScsServices\Service\ServiceClientEventArgs.cs" />
+    <Compile Include="Communication\Scs\Client\ClientReConnecter.cs" />
+    <Compile Include="Communication\Scs\Client\IConnectableClient.cs" />
+    <Compile Include="Communication\Scs\Client\IScsClient.cs" />
+    <Compile Include="Communication\Scs\Client\ScsClientBase.cs" />
+    <Compile Include="Communication\Scs\Client\ScsClientFactory.cs" />
+    <Compile Include="Communication\Scs\Client\Tcp\ScsTcpClient.cs" />
+    <Compile Include="Communication\Scs\Client\Tcp\TcpHelper.cs" />
+    <Compile Include="Communication\Scs\Communication\Channels\CommunicationChannelBase.cs" />
+    <Compile Include="Communication\Scs\Communication\Channels\CommunicationChannelEventArgs.cs" />
+    <Compile Include="Communication\Scs\Communication\Channels\ConnectionListenerBase.cs" />
+    <Compile Include="Communication\Scs\Communication\Channels\ICommunicationChannel.cs" />
+    <Compile Include="Communication\Scs\Communication\Channels\IConnectionListener.cs" />
+    <Compile Include="Communication\Scs\Communication\Channels\Tcp\TcpCommunicationChannel.cs" />
+    <Compile Include="Communication\Scs\Communication\Channels\Tcp\TcpConnectionListener.cs" />
+    <Compile Include="Communication\Scs\Communication\CommunicationStateException.cs" />
+    <Compile Include="Communication\Scs\Communication\CommunicationStates.cs" />
+    <Compile Include="Communication\Scs\Communication\CommunicationException.cs" />
+    <Compile Include="Communication\Scs\Communication\EndPoints\ScsEndPoint.cs" />
+    <Compile Include="Communication\Scs\Communication\EndPoints\Tcp\ScsTcpEndPoint.cs" />
+    <Compile Include="Communication\Scs\Communication\Messengers\IMessenger.cs" />
+    <Compile Include="Communication\Scs\Communication\Messages\IScsMessage.cs" />
+    <Compile Include="Communication\Scs\Communication\Messages\MessageEventArgs.cs" />
+    <Compile Include="Communication\Scs\Communication\Messages\PingMessage.cs" />
+    <Compile Include="Communication\Scs\Communication\Messages\ScsMessage.cs" />
+    <Compile Include="Communication\Scs\Communication\Messages\ScsRawDataMessage.cs" />
+    <Compile Include="Communication\Scs\Communication\Messages\ScsTextMessage.cs" />
+    <Compile Include="Communication\Scs\Communication\Protocols\BinarySerialization\BinarySerializationProtocol.cs" />
+    <Compile Include="Communication\Scs\Communication\Protocols\BinarySerialization\BinarySerializationProtocolFactory.cs" />
+    <Compile Include="Communication\Scs\Communication\Protocols\IScsWireProtocol.cs" />
+    <Compile Include="Communication\Scs\Communication\Protocols\IScsWireProtocolFactory.cs" />
+    <Compile Include="Communication\Scs\Communication\Protocols\WireProtocolManager.cs" />
+    <Compile Include="Communication\Scs\Communication\Messengers\SynchronizedMessenger.cs" />
+    <Compile Include="Communication\Scs\Server\IScsServer.cs" />
+    <Compile Include="Communication\Scs\Server\IScsServerClient.cs" />
+    <Compile Include="Communication\Scs\Server\ScsServerBase.cs" />
+    <Compile Include="Communication\Scs\Server\ScsServerClient.cs" />
+    <Compile Include="Communication\Scs\Server\ScsServerFactory.cs" />
+    <Compile Include="Communication\Scs\Server\ScsServerManager.cs" />
+    <Compile Include="Communication\Scs\Server\ServerClientEventArgs.cs" />
+    <Compile Include="Communication\Scs\Server\Tcp\ScsTcpServer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Threading\SequentialItemProcessor.cs" />
+    <Compile Include="Threading\Timer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Diagrams\ChannelsDiagram.cd" />
+    <None Include="Diagrams\ConnListenerDiagram.cd" />
+    <None Include="Diagrams\EndPointsDiagram.cd" />
+    <None Include="Diagrams\MessageObjectsDiagram.cd" />
+    <None Include="Diagrams\RequestReplyMessengerDiagram.cd" />
+    <None Include="Diagrams\RmiMessagesDiagram.cd" />
+    <None Include="Diagrams\ScsClientDiagram.cd" />
+    <None Include="Diagrams\ScsServerClientDiagram.cd" />
+    <None Include="Diagrams\ScsServerDiagram.cd" />
+    <None Include="Diagrams\ScsServiceClientDiagram.cd" />
+    <None Include="Diagrams\ScsServiceDiagram.cd" />
+    <None Include="Diagrams\ServiceSideClientDiagram.cd" />
+    <None Include="Diagrams\WireProtocolsDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Changes.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

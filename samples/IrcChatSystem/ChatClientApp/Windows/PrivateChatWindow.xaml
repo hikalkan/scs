@@ -1,0 +1,29 @@
+﻿<Window xmlns:my="clr-namespace:Hik.Samples.Scs.IrcChat.Controls"  x:Class="Hik.Samples.Scs.IrcChat.Windows.PrivateChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Remote User Nick" Height="441" Width="555" Icon="/ChatClientApp;component/Images/app_icon.ico">
+    <Grid Background="#FF1F1F1F">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="115" />
+        </Grid.ColumnDefinitions>
+        <my:MessagingAreaControl x:Name="MessageHistory" />
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="115" />
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="115" />
+            </Grid.RowDefinitions>
+            <Border Margin="5" BorderThickness="1" Background="#FF272626">
+                <Image Grid.Row="0" Stretch="UniformToFill" Name="imgRemoteUserAvatar" StretchDirection="Both" />
+            </Border>
+            <Label Grid.Row="1" Content="Available" Foreground="#FF2BE400" Padding="1" Name="lblRemoteUserStatus" HorizontalContentAlignment="Left" VerticalAlignment="Top" Margin="5,1"></Label>
+            <Label Grid.Row="3" Content="Available" Foreground="#FF2BE400" Padding="1" Name="lblCurrentUserStatus" HorizontalContentAlignment="Left" VerticalAlignment="Bottom" Margin="5,1"></Label>
+            <Border Grid.Row="4" Margin="5" BorderThickness="1" Background="#FF272626">
+                <Image Stretch="UniformToFill" Name="imgCurrentUserAvatar" StretchDirection="Both" />
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

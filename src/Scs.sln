@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scs", "Scs\Scs.csproj", "{0DC81B09-3ABF-4BB3-8C08-4E8EE4432BDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0DC81B09-3ABF-4BB3-8C08-4E8EE4432BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC81B09-3ABF-4BB3-8C08-4E8EE4432BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC81B09-3ABF-4BB3-8C08-4E8EE4432BDC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0DC81B09-3ABF-4BB3-8C08-4E8EE4432BDC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0DC81B09-3ABF-4BB3-8C08-4E8EE4432BDC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0DC81B09-3ABF-4BB3-8C08-4E8EE4432BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC81B09-3ABF-4BB3-8C08-4E8EE4432BDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC81B09-3ABF-4BB3-8C08-4E8EE4432BDC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0DC81B09-3ABF-4BB3-8C08-4E8EE4432BDC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0DC81B09-3ABF-4BB3-8C08-4E8EE4432BDC}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

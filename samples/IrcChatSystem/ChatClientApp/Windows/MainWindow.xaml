@@ -1,0 +1,89 @@
+﻿<Window xmlns:my="clr-namespace:Hik.Samples.Scs.IrcChat.Controls"  x:Class="Hik.Samples.Scs.IrcChat.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SCS Chat Client" Height="517" Width="885" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" Closing="Window_Closing" Loaded="Window_Loaded" Icon="/ChatClientApp;component/Images/app_icon.ico">
+    <Grid>
+        <Grid Background="#FF1F1F1F">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="240" />
+            </Grid.ColumnDefinitions>
+            <my:MessagingAreaControl x:Name="messagingArea" />
+            <StackPanel Grid.Column="1" Margin="5">
+                <Border Margin="0,0,5,5" Height="80">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF393939" Offset="0" />
+                            <GradientStop Color="Black" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Margin="3" Grid.Column="0" BorderThickness="1" Background="#FF272626">
+                            <Image Stretch="UniformToFill" Name="imgCurrentUserAvatar" />
+                        </Border>
+                        <StackPanel Grid.Column="1">
+                            <Label Content="User Nick" Foreground="White" Height="Auto" Padding="2" Name="lblCurrentUserNick" Margin="3,1"></Label>
+                            <ComboBox Name="cmbCurrentUserStatus" Margin="3,1" Background="#FF353535" SelectionChanged="cmbCurrentUserStatus_SelectionChanged" SelectedIndex="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" IsReadOnly="False" BorderBrush="{x:Null}" Foreground="White" BorderThickness="0">
+                                <ComboBoxItem HorizontalContentAlignment="Stretch"  Background="#FF353535" VerticalContentAlignment="Stretch">
+                                    <Label Content="Available" Foreground="#FF2BE400" />
+                                </ComboBoxItem>
+                                <ComboBoxItem HorizontalContentAlignment="Stretch" Background="#FF353535" VerticalContentAlignment="Stretch">
+                                    <Label Content="Busy" Foreground="#FFFF4E4E" />
+                                </ComboBoxItem>
+                                <ComboBoxItem HorizontalContentAlignment="Stretch" Background="#FF353535" VerticalContentAlignment="Stretch">
+                                    <Label Content="Out" Foreground="#FF3179FE" />
+                                </ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Name="spUsers" >
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+        </Grid>
+        <Grid Background="White" Opacity="0.7" Name="grdConnect"></Grid>
+        <Border Width="300" Height="115" Padding="2" Name="brdConnect" KeyDown="LoginForm_KeyDown">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="115" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Margin="2" BorderThickness="1" Background="#FF272626">
+                    <Border.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Change to male" Click="ChangeToMale_Click" />
+                            <MenuItem Header="Change to female" Click="ChangeToFemale_Click" />
+                            <MenuItem Header="Select a picture..." Click="SelectAvatar_Click" />
+                        </ContextMenu>
+                    </Border.ContextMenu>
+                    <Image Grid.Column="0" Stretch="UniformToFill" Name="imgLoginAvatar" StretchDirection="Both" />
+                </Border>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Nick:" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Bold" />
+                    <Label Grid.Column="0" Grid.Row="1" Content="Server IP:" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Normal" />
+                    <Label Grid.Column="0" Grid.Row="2" Content="Server Port:" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Normal" />
+                    <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="User Nick" FontWeight="Bold" VerticalContentAlignment="Center" Name="txtNick" TextChanged="txtNick_TextChanged"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="1" Margin="2" Text="127.0.0.1" VerticalContentAlignment="Center" Name="txtServerIpAddress"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="2" Margin="2" Text="10048" VerticalContentAlignment="Center" Name="txtServerPort"></TextBox>
+                    <Button Grid.Column="1" Content="Login" Grid.Row="3" Margin="2" FontSize="15" FontWeight="Bold" Name="btnLogin" Click="btnLogin_Click" />
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

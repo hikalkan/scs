@@ -1,0 +1,25 @@
+﻿<Window x:Class="Hik.Samples.Scs.IrcChat.Windows.TextColorPicker"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Select text color" Height="211" Width="339" Icon="/ChatClientApp;component/Images/text_color_picker.ico">
+    <Grid Background="#FF606060">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Background="#FF343434" Grid.Column="0" Grid.Row="0" Content="Sample text" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1" Padding="3" MouseLeftButtonUp="Label_MouseLeftButtonUp" />
+        <Label Background="#FF343434" Grid.Column="1" Grid.Row="0" Content="Sample text" Foreground="#FFFF5C5C" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1" Padding="3" MouseLeftButtonUp="Label_MouseLeftButtonUp" />
+        <Label Background="#FF343434" Grid.Column="0" Grid.Row="1" Content="Sample text" Foreground="#FF3EA2FF" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1" Padding="3" MouseLeftButtonUp="Label_MouseLeftButtonUp" />
+        <Label Background="#FF343434" Grid.Column="1" Grid.Row="1" Content="Sample text" Foreground="#FFEAFE44" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1" Padding="3" MouseLeftButtonUp="Label_MouseLeftButtonUp" />
+        <Label Background="#FF343434" Grid.Column="0" Grid.Row="2" Content="Sample text" Foreground="Lime" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1" Padding="3" MouseLeftButtonUp="Label_MouseLeftButtonUp" />
+        <Label Background="#FF343434" Grid.Column="1" Grid.Row="2" Content="Sample text" Foreground="#FFFF41FA" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1" Padding="3" MouseLeftButtonUp="Label_MouseLeftButtonUp" />
+        <Label Background="#FF343434" Grid.Column="0" Grid.Row="3" Content="Sample text" Foreground="#FF47F1E9" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1" Padding="3" MouseLeftButtonUp="Label_MouseLeftButtonUp" />
+        <Label Background="#FF343434" Grid.Column="1" Grid.Row="3" Content="Sample text" Foreground="#FFFFBA41" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1" Padding="3" MouseLeftButtonUp="Label_MouseLeftButtonUp" />
+    </Grid>
+</Window>

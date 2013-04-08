@@ -1,0 +1,37 @@
+﻿# Version 1.1.0.1 - 13.06.2011 - Halil ibrahim Kalkan
+  # Bugfix:
+    # Ping message must not be raised by messaging layer.
+
+# Version 1.1.0.0 - 28.05.2011 - Halil ibrahim Kalkan
+  # Additions:
+	# ClientDisconnected event added to IScsServiceApplication and IScsServer classes.
+	# MessageSent event is added to IMessenger interface.
+	# SynchronizedMessenger class is added to receive messages as synchronized.
+  # Changes/Improvements:
+    # Changed background thread mechanism to provide more scalable framework.
+      Used TPL Tasks and Async sockets instead of directly use of threads and blocking sockets (Added SequentialItemProcessor class).
+    # Added IScsWireProtocolFactory interface and changed IScsServer.WireProtocol to IScsServer.WireProtocolFactory.
+	  Also, IScsWireProtocol is completely changed.
+      (This change is not backward compatible)
+	# BinarySerializationProtocol class is made public to allow user to override serialization methods.
+	# Codes completely revised, some parts refactored and commented.
+  # BugFix:
+    # Fixed a potential minor bug in Timer.
+
+# Version 1.0.2.0 - 11.05.2011 - Halil ibrahim Kalkan
+  Feature:
+  # Added RemoteEndPoint property to get address of client application in server side.
+    (Added to ICommunicationChannel, IScsServerClient and IScsServiceClient)
+
+# Version 1.0.1.0 - 10.04.2011 - Halil ibrahim Kalkan
+  Feature:
+  # Added ConnectTimeout property to IConnectableClient to provide a way of setting
+	timeout value while connecting to a server.
+
+# Version 1.0.0.1 - 10.04.2011 - Halil ibrahim Kalkan
+  BugFix:
+  # RequestReplyMessenger starts when a client is created. It must start when connected to server.
+	Otherwise, if user does not connect to client, a thread remains running.
+
+# Version 1.0.0.0 - 01.02.2011 - Halil ibrahim Kalkan
+  First stable release.

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Hik.Communication.Scs.Communication.Messengers.RequestReplyMessenger&lt;T&gt;">
+    <Position X="0.5" Y="3.75" Width="5.5" />
+    <Members>
+      <Method Name="Dispose" Hidden="true" />
+      <Property Name="LastReceivedMessageTime" Hidden="true" />
+      <Property Name="LastSentMessageTime" Hidden="true" />
+      <Property Name="Messenger" Hidden="true" />
+      <Method Name="Messenger_MessageReceived" Hidden="true" />
+      <Method Name="Messenger_MessageSent" Hidden="true" />
+      <Method Name="OnMessageReceived" Hidden="true" />
+      <Method Name="OnMessageSent" Hidden="true" />
+      <Method Name="RequestReplyMessenger" Hidden="true" />
+      <Property Name="WireProtocol" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Hik.Communication.Scs.Communication.Messengers.RequestReplyMessenger&lt;T&gt;.WaitingMessage" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Communication\Scs\Communication\Messengers\RequestReplyMessenger.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Enum Name="Hik.Communication.Scs.Communication.Messengers.RequestReplyMessenger&lt;T&gt;.WaitingMessageStates" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Communication\Scs\Communication\Messengers\RequestReplyMessenger.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ABAEABBgQDAAICYQACAAACQAAAAAAEIAIAAAAAAAAgg=</HashCode>
+      <FileName>Communication\Scs\Communication\Messengers\RequestReplyMessenger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Hik.Communication.Scs.Communication.Messengers.IMessenger">
+    <Position X="0.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAIAQQACAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Communication\Scs\Communication\Messengers\IMessenger.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

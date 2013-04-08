@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Hik.Communication.Scs.Communication.EndPoints.ScsEndPoint">
+    <Position X="1.25" Y="1.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAABABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Communication\Scs\Communication\EndPoints\ScsEndPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hik.Communication.Scs.Communication.EndPoints.Tcp.ScsTcpEndPoint">
+    <Position X="5.75" Y="1.25" Width="3" />
+    <InheritanceLine Type="Hik.Communication.Scs.Communication.EndPoints.ScsEndPoint" FixedFromPoint="true">
+      <Path>
+        <Point X="5" Y="1.875" />
+        <Point X="5.75" Y="1.875" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Communication\Scs\Communication\EndPoints\Tcp\ScsTcpEndPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
