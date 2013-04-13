@@ -3,7 +3,7 @@ scs
 
 TCP Server/Client Communication and RMI Framework
 
-- It is an well documented Open Source server/client based framework.
+- It is well documented open source server/client framework.
 - Allows remote method calls from client to server and from server to client easily. Can throw exceptions across applications.
 - Allows acynhronous or synchronous low level messaging instead of remote method calls.
 - It is scalable (15000+ clients concurrently connected and communicating while server has only 50-60 threads) and fast (5,500 remote method calls, 62,500 messages transfer between applications in a second running in a regular PC).
