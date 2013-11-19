@@ -33,7 +33,7 @@
   <ItemGroup>
     <Reference Include="Scs, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Scs-Binaries\Scs.dll</HintPath>
+      <HintPath>..\..\..\Binaries\Scs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
