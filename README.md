@@ -1,7 +1,7 @@
-scs
-===
+SCS - TCP Server/Client Communication and RMI Framework
+======================================================================
 
-TCP Server/Client Communication and RMI Framework
+### What is SCS?
 
 - It is well documented open source server/client framework.
 - Allows remote method calls from client to server and from server to client easily. Can throw exceptions across applications.
@@ -13,7 +13,13 @@ TCP Server/Client Communication and RMI Framework
 - Allows a client to register events for connecting and disconnecting.
 - It is suitable for long session connections between clients and server.
 
-Detailed Documentation
+### Detailed Documentation
 
 - Usage: http://www.codeproject.com/Articles/153938/A-Complete-TCP-Server-Client-Communication-and-RMI
 - Implementation: http://www.codeproject.com/Articles/155282/A-Complete-TCP-Server-Client-Communication-and-RMI
+
+### How to download
+
+You can download SCS binaries and source codes directly from here (Github).
+
+If you're using Visual Studio, you can get from Nuget (https://www.nuget.org/packages/SCS).
