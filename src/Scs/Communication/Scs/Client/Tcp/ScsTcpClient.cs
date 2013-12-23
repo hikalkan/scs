@@ -32,7 +32,7 @@ namespace Hik.Communication.Scs.Client.Tcp
         {
             return new TcpCommunicationChannel(
                 TcpHelper.ConnectToServer(
-                    new IPEndPoint(IPAddress.Parse(_serverEndPoint.IpAddress), _serverEndPoint.TcpPort),
+                    new IPEndPoint(_serverEndPoint.IpAddress, _serverEndPoint.TcpPort),
                     ConnectTimeout
                     ));
         }
