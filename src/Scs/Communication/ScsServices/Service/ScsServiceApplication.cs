@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Hik.Collections;
 using Hik.Communication.Scs.Communication.Messages;
@@ -337,9 +338,13 @@ namespace Hik.Communication.ScsServices.Service
 
                 ServiceAttribute = classAttributes[0] as ScsServiceAttribute;
                 _methods = new SortedList<string, MethodInfo>();
-                foreach (var methodInfo in serviceInterfaceType.GetMethods())
+
+                foreach (var serviceInterface in serviceInterfaceType.GetInterfaces().Union(new[] {serviceInterfaceType}))
                 {
-                    _methods.Add(methodInfo.Name, methodInfo);
+                    foreach (var methodInfo in serviceInterface.GetMethods())
+                    {
+                        _methods[methodInfo.Name] = methodInfo;
+                    }
                 }
             }
 
