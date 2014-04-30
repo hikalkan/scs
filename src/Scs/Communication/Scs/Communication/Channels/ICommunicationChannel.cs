@@ -8,7 +8,7 @@ namespace Hik.Communication.Scs.Communication.Channels
     /// Represents a communication channel.
     /// A communication channel is used to communicate (send/receive messages) with a remote application.
     /// </summary>
-    internal interface ICommunicationChannel : IMessenger
+    public interface ICommunicationChannel : IMessenger
     {
         /// <summary>
         /// This event is raised when client disconnected from server.

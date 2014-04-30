@@ -8,7 +8,7 @@ namespace Hik.Communication.Scs.Communication.Channels
     /// <summary>
     /// This class provides base functionality for all communication channel classes.
     /// </summary>
-    internal abstract class CommunicationChannelBase : ICommunicationChannel
+    public abstract class CommunicationChannelBase : ICommunicationChannel
     {
         #region Public events
 

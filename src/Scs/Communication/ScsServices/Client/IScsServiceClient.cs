@@ -1,4 +1,5 @@
 ﻿using Hik.Communication.Scs.Client;
+using Hik.Communication.Scs.Communication.Channels;
 
 namespace Hik.Communication.ScsServices.Client
 {
@@ -8,6 +9,11 @@ namespace Hik.Communication.ScsServices.Client
     /// <typeparam name="T">Type of service interface</typeparam>
     public interface IScsServiceClient<out T> : IConnectableClient where T : class
     {
+        /// <summary>
+        /// Gets the communication channel for client.
+        /// </summary>
+        ICommunicationChannel CommunicationChannel { get; }
+        
         /// <summary>
         /// Reference to the service proxy to invoke remote service methods.
         /// </summary>

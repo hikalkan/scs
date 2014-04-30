@@ -2,6 +2,7 @@
 using System.Reflection;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication;
+using Hik.Communication.Scs.Communication.Channels;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Communication.Messengers;
 using Hik.Communication.ScsServices.Communication;
@@ -48,6 +49,9 @@ namespace Hik.Communication.ScsServices.Client
         {
             get { return _client.CommunicationState; }
         }
+
+        /// <inheritdoc />
+        public ICommunicationChannel CommunicationChannel { get { return _client.CommunicationChannel; }}
 
         /// <summary>
         /// Reference to the service proxy to invoke remote service methods.

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Net.Sockets;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Client.Tcp;
 using Hik.Communication.Scs.Server;
@@ -12,6 +13,12 @@ namespace Hik.Communication.Scs.Communication.EndPoints.Tcp
     /// </summary>
     public sealed class ScsTcpEndPoint : ScsEndPoint
     {
+        #region Private fields
+
+        private SocketInformation? _existingSocketInformation;
+
+        #endregion
+
         ///<summary>
         /// IP address of the server.
         ///</summary>
@@ -36,7 +43,9 @@ namespace Hik.Communication.Scs.Communication.EndPoints.Tcp
         /// </summary>
         /// <param name="ipAddress">IP address of the server</param>
         /// <param name="port">Listening TCP Port for incoming connection requests on server</param>
-        public ScsTcpEndPoint(string ipAddress, int port) : this(IPAddress.Parse(ipAddress), port)
+        /// <param name="socketInformation">The existing socket information.</param>
+        public ScsTcpEndPoint(string ipAddress, int port, SocketInformation? socketInformation = null)
+            : this(IPAddress.Parse(ipAddress), port, socketInformation)
         { }
 
         /// <summary>
@@ -44,10 +53,12 @@ namespace Hik.Communication.Scs.Communication.EndPoints.Tcp
         /// </summary>
         /// <param name="ipAddress">IP address of the server</param>
         /// <param name="port">Listening TCP Port for incoming connection requests on server</param>
-        public ScsTcpEndPoint(IPAddress ipAddress, int port)
+        /// <param name="socketInformation">The existing socket information.</param>
+        public ScsTcpEndPoint(IPAddress ipAddress, int port, SocketInformation? socketInformation = null)
         {
             IpAddress = ipAddress;
             TcpPort = port;
+            _existingSocketInformation = socketInformation;
         }
         
         /// <summary>
@@ -78,7 +89,9 @@ namespace Hik.Communication.Scs.Communication.EndPoints.Tcp
         /// <returns>Scs Client</returns>
         internal override IScsClient CreateClient()
         {
-            return new ScsTcpClient(this);
+            var client = new ScsTcpClient(this, _existingSocketInformation);
+            _existingSocketInformation = null;
+            return client;
         }
 
         /// <summary>

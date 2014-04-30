@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Data;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using Hik.Communication.Scs.Communication.EndPoints;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.Scs.Communication.Messages;
@@ -10,8 +13,15 @@ namespace Hik.Communication.Scs.Communication.Channels.Tcp
     /// <summary>
     /// This class is used to communicate with a remote application over TCP/IP protocol.
     /// </summary>
-    internal class TcpCommunicationChannel : CommunicationChannelBase
+    public class TcpCommunicationChannel : CommunicationChannelBase
     {
+        #region Constants
+
+        private const ushort PING_REQUEST = 0x0779;
+        private const ushort PING_RESPONSE = 0x0988;
+
+        #endregion
+
         #region Public properties
 
         ///<summary>
@@ -79,6 +89,24 @@ namespace Hik.Communication.Scs.Communication.Channels.Tcp
         #endregion
 
         #region Public methods
+
+        /// <summary>
+        /// Duplicates the client socket and closes.
+        /// </summary>
+        /// <param name="processId">The process identifier.</param>
+        /// <returns></returns>
+        /// <summary>The callee should dispose anything relying on this channel immediately.</summary>
+        public SocketInformation DuplicateSocketAndClose(int processId)
+        {
+            // request ping from host to kill our async BeginReceive
+            _clientSocket.Send(BitConverter.GetBytes(PING_REQUEST));
+            
+            // wait for response
+            while (_running) Thread.Sleep(20);
+
+            // finally 
+            return _clientSocket.DuplicateAndClose(processId);
+        }
 
         /// <summary>
         /// Disconnects from remote application and closes channel.
@@ -173,6 +201,22 @@ namespace Hik.Communication.Scs.Communication.Channels.Tcp
                 var bytesRead = _clientSocket.EndReceive(ar);
                 if (bytesRead > 0)
                 {
+                    // handle special packets
+                    if (bytesRead == 2)
+                    {
+                        switch (BitConverter.ToUInt16(_buffer, 0))
+                        {
+                            case PING_REQUEST:
+                                _clientSocket.Send(BitConverter.GetBytes(PING_RESPONSE));
+                                goto CONT_RECEIVE;
+
+                            case PING_RESPONSE:
+                                // instigated by DuplicateSocketAndClose
+                                _running = false;
+                                return;
+                        }
+                    }
+
                     LastReceivedMessageTime = DateTime.Now;
 
                     //Copy received bytes to a new byte array
@@ -193,6 +237,7 @@ namespace Hik.Communication.Scs.Communication.Channels.Tcp
                     throw new CommunicationException("Tcp socket is closed");
                 }
 
+                CONT_RECEIVE:
                 //Read more bytes if still running
                 if (_running)
                 {
