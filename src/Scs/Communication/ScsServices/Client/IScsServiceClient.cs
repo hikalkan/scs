@@ -26,5 +26,12 @@ namespace Hik.Communication.ScsServices.Client
         /// Default value: 60000 (1 minute).
         /// </summary>
         int Timeout { get; set; }
+
+        /// <summary>
+        /// Gets a service proxy for the specified <typeparamref name="TServiceInterface" />.
+        /// </summary>
+        /// <typeparam name="TServiceInterface">the service interface type</typeparam>
+        /// <returns></returns>
+        TServiceInterface GetServiceProxy<TServiceInterface>();
     }
 }

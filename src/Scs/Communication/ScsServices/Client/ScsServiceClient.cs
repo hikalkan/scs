@@ -142,6 +142,16 @@ namespace Hik.Communication.ScsServices.Client
         }
 
         /// <summary>
+        /// Gets a service proxy for the specified <typeparamref name="TServiceInterface" />.
+        /// </summary>
+        /// <typeparam name="TServiceInterface">the service interface type</typeparam>
+        /// <returns></returns>
+        public TServiceInterface GetServiceProxy<TServiceInterface>()
+        {
+            return (TServiceInterface) new AutoConnectRemoteInvokeProxy<TServiceInterface, IScsClient>(_requestReplyMessenger, this).GetTransparentProxy();
+        }
+
+        /// <summary>
         /// Calls Disconnect method.
         /// </summary>
         public void Dispose()
