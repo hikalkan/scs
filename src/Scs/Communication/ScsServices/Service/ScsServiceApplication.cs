@@ -331,12 +331,8 @@ namespace Hik.Communication.ScsServices.Service
             {
                 Service = service;
                 var classAttributes = serviceInterfaceType.GetCustomAttributes(typeof(ScsServiceAttribute), true);
-                if (classAttributes.Length <= 0)
-                {
-                    throw new Exception("Service interface (" + serviceInterfaceType.Name + ") must has ScsService attribute.");
-                }
 
-                ServiceAttribute = classAttributes[0] as ScsServiceAttribute;
+                ServiceAttribute = classAttributes.Length > 0 ? classAttributes[0] as ScsServiceAttribute : new ScsServiceAttribute { Version = "1.0.0.0" };
                 _methods = new SortedList<string, MethodInfo>();
 
                 foreach (var serviceInterface in serviceInterfaceType.GetInterfaces().Union(new[] {serviceInterfaceType}))
