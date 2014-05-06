@@ -332,9 +332,11 @@ namespace Hik.Communication.ScsServices.Service
                 Service = service;
                 var classAttributes = serviceInterfaceType.GetCustomAttributes(typeof(ScsServiceAttribute), true);
 
-                ServiceAttribute = classAttributes.Length > 0 ? classAttributes[0] as ScsServiceAttribute : new ScsServiceAttribute { Version = "1.0.0.0" };
-                _methods = new SortedList<string, MethodInfo>();
+                ServiceAttribute = classAttributes.Length > 0
+                    ? classAttributes[0] as ScsServiceAttribute
+                    : new ScsServiceAttribute {Version = serviceInterfaceType.Assembly.GetName().Version.ToString()};
 
+                _methods = new SortedList<string, MethodInfo>();
                 foreach (var serviceInterface in serviceInterfaceType.GetInterfaces().Union(new[] {serviceInterfaceType}))
                 {
                     foreach (var methodInfo in serviceInterface.GetMethods())
