@@ -1,5 +1,4 @@
 ﻿using System.Net.Sockets;
-using System.Runtime.InteropServices;
 using Hik.Communication.Scs.Communication.Channels;
 using Hik.Communication.Scs.Communication.Channels.Tcp;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;
