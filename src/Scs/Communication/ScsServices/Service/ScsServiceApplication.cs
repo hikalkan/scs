@@ -228,12 +228,14 @@ namespace Hik.Communication.ScsServices.Service
                 catch (TargetInvocationException ex)
                 {
                     var innerEx = ex.InnerException;
-                    SendInvokeResponse(requestReplyMessenger, invokeMessage, null, new ScsRemoteException(innerEx.Message + Environment.NewLine + "Service Version: " + serviceObject.ServiceAttribute.Version, innerEx));
+                    SendInvokeResponse(requestReplyMessenger, invokeMessage, null,
+                        new ScsRemoteInvocationException(invokeMessage.ServiceClassName, serviceObject.ServiceAttribute.Version, invokeMessage.MethodName, innerEx.Message, innerEx));
                     return;
                 }
                 catch (Exception ex)
                 {
-                    SendInvokeResponse(requestReplyMessenger, invokeMessage, null, new ScsRemoteException(ex.Message + Environment.NewLine + "Service Version: " + serviceObject.ServiceAttribute.Version, ex));
+                    SendInvokeResponse(requestReplyMessenger, invokeMessage, null,
+                        new ScsRemoteInvocationException(invokeMessage.ServiceClassName, serviceObject.ServiceAttribute.Version, invokeMessage.MethodName, ex.Message, ex));
                     return;
                 }
             }
