@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication;
@@ -191,6 +192,13 @@ namespace Hik.Communication.ScsServices.Client
             {
                 var type = _clientObject.GetType();
                 var method = type.GetMethod(invokeMessage.MethodName);
+
+                if (method == null)
+                {
+                    // look for interface methods that the client object may have explicitly implemented
+                    method = type.GetInterfaces().Select(t => t.GetMethod(invokeMessage.MethodName)).FirstOrDefault(m => m != null);
+                }
+
                 returnValue = method.Invoke(_clientObject, invokeMessage.Parameters);
             }
             catch (TargetInvocationException ex)
