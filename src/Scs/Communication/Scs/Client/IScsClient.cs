@@ -1,4 +1,5 @@
 ﻿using Hik.Communication.Scs.Communication;
+using Hik.Communication.Scs.Communication.Channels;
 using Hik.Communication.Scs.Communication.Messengers;
 
 namespace Hik.Communication.Scs.Client
@@ -8,6 +9,12 @@ namespace Hik.Communication.Scs.Client
     /// </summary>
     public interface IScsClient : IMessenger, IConnectableClient
     {
-        //Does not define any additional member
+        /// <summary>
+        /// Gets the communication channel for this client.
+        /// </summary>
+        /// <value>
+        /// The communication channel.
+        /// </value>
+        ICommunicationChannel CommunicationChannel { get; }
     }
 }

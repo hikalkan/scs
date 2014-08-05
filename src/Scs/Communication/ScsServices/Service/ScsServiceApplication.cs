@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Hik.Collections;
 using Hik.Communication.Scs.Communication.Messages;
@@ -227,12 +228,14 @@ namespace Hik.Communication.ScsServices.Service
                 catch (TargetInvocationException ex)
                 {
                     var innerEx = ex.InnerException;
-                    SendInvokeResponse(requestReplyMessenger, invokeMessage, null, new ScsRemoteException(innerEx.Message + Environment.NewLine + "Service Version: " + serviceObject.ServiceAttribute.Version, innerEx));
+                    SendInvokeResponse(requestReplyMessenger, invokeMessage, null,
+                        new ScsRemoteInvocationException(invokeMessage.ServiceClassName, serviceObject.ServiceAttribute.Version, invokeMessage.MethodName, innerEx.Message, innerEx));
                     return;
                 }
                 catch (Exception ex)
                 {
-                    SendInvokeResponse(requestReplyMessenger, invokeMessage, null, new ScsRemoteException(ex.Message + Environment.NewLine + "Service Version: " + serviceObject.ServiceAttribute.Version, ex));
+                    SendInvokeResponse(requestReplyMessenger, invokeMessage, null,
+                        new ScsRemoteInvocationException(invokeMessage.ServiceClassName, serviceObject.ServiceAttribute.Version, invokeMessage.MethodName, ex.Message, ex));
                     return;
                 }
             }
@@ -330,16 +333,18 @@ namespace Hik.Communication.ScsServices.Service
             {
                 Service = service;
                 var classAttributes = serviceInterfaceType.GetCustomAttributes(typeof(ScsServiceAttribute), true);
-                if (classAttributes.Length <= 0)
-                {
-                    throw new Exception("Service interface (" + serviceInterfaceType.Name + ") must has ScsService attribute.");
-                }
 
-                ServiceAttribute = classAttributes[0] as ScsServiceAttribute;
+                ServiceAttribute = classAttributes.Length > 0
+                    ? classAttributes[0] as ScsServiceAttribute
+                    : new ScsServiceAttribute {Version = serviceInterfaceType.Assembly.GetName().Version.ToString()};
+
                 _methods = new SortedList<string, MethodInfo>();
-                foreach (var methodInfo in serviceInterfaceType.GetMethods())
+                foreach (var serviceInterface in serviceInterfaceType.GetInterfaces().Union(new[] {serviceInterfaceType}))
                 {
-                    _methods.Add(methodInfo.Name, methodInfo);
+                    foreach (var methodInfo in serviceInterface.GetMethods())
+                    {
+                        _methods[methodInfo.Name] = methodInfo;
+                    }
                 }
             }
 

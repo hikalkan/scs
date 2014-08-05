@@ -22,6 +22,7 @@ namespace Hik.Communication.Scs.Client.Tcp
             var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
+                socket.UseOnlyOverlappedIO = true;
                 socket.Blocking = false;
                 socket.Connect(endPoint);
                 socket.Blocking = true;

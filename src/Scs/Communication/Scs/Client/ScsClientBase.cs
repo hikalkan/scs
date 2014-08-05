@@ -326,5 +326,12 @@ namespace Hik.Communication.Scs.Client
         }
 
         #endregion
+
+        #region Implementation of IScsClient
+
+        /// <inheritdoc />
+        public ICommunicationChannel CommunicationChannel { get { return _communicationChannel; } }
+
+        #endregion
     }
 }

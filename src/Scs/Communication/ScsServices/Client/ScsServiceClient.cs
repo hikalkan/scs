@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication;
+using Hik.Communication.Scs.Communication.Channels;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Communication.Messengers;
 using Hik.Communication.ScsServices.Communication;
@@ -48,6 +50,9 @@ namespace Hik.Communication.ScsServices.Client
         {
             get { return _client.CommunicationState; }
         }
+
+        /// <inheritdoc />
+        public ICommunicationChannel CommunicationChannel { get { return _client.CommunicationChannel; }}
 
         /// <summary>
         /// Reference to the service proxy to invoke remote service methods.
@@ -138,6 +143,16 @@ namespace Hik.Communication.ScsServices.Client
         }
 
         /// <summary>
+        /// Gets a service proxy for the specified <typeparamref name="TServiceInterface" />.
+        /// </summary>
+        /// <typeparam name="TServiceInterface">the service interface type</typeparam>
+        /// <returns></returns>
+        public TServiceInterface GetServiceProxy<TServiceInterface>()
+        {
+            return (TServiceInterface) new AutoConnectRemoteInvokeProxy<TServiceInterface, IScsClient>(_requestReplyMessenger, this).GetTransparentProxy();
+        }
+
+        /// <summary>
         /// Calls Disconnect method.
         /// </summary>
         public void Dispose()
@@ -177,6 +192,13 @@ namespace Hik.Communication.ScsServices.Client
             {
                 var type = _clientObject.GetType();
                 var method = type.GetMethod(invokeMessage.MethodName);
+
+                if (method == null)
+                {
+                    // look for interface methods that the client object may have explicitly implemented
+                    method = type.GetInterfaces().Select(t => t.GetMethod(invokeMessage.MethodName)).FirstOrDefault(m => m != null);
+                }
+
                 returnValue = method.Invoke(_clientObject, invokeMessage.Parameters);
             }
             catch (TargetInvocationException ex)

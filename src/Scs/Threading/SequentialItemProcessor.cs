@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Hik.Threading
 {
@@ -21,12 +21,6 @@ namespace Hik.Threading
         /// Item queue. Used to process items sequentially.
         /// </summary>
         private readonly Queue<TItem> _queue;
-
-        /// <summary>
-        /// A reference to the current Task that is processing an item in
-        /// ProcessItem method.
-        /// </summary>
-        private Task _currentProcessTask;
 
         /// <summary>
         /// Indicates state of the item processing.
@@ -79,7 +73,7 @@ namespace Hik.Threading
 
                 if (!_isProcessing)
                 {
-                    _currentProcessTask = Task.Factory.StartNew(ProcessItem);
+                    ThreadPool.QueueUserWorkItem(ProcessItem);
                 }
             }
         }
@@ -100,25 +94,9 @@ namespace Hik.Threading
             _isRunning = false;
 
             //Clear all incoming messages
-            lock (_syncObj)
+            lock (_syncObj) 
             {
                 _queue.Clear();
-            }
-
-            //Check if is there a message that is being processed now
-            if (!_isProcessing)
-            {
-                return;
-            }
-
-            //Wait current processing task to finish
-            try
-            {
-                _currentProcessTask.Wait();
-            }
-            catch
-            {
-
             }
         }
 
@@ -127,10 +105,10 @@ namespace Hik.Threading
         #region Private methods
 
         /// <summary>
-        /// This method runs on a new seperated Task (thread) to process
+        /// This method runs on a new separated Task (thread) to process
         /// items on the queue.
         /// </summary>
-        private void ProcessItem()
+        private void ProcessItem(object state)
         {
             //Try to get an item from queue to process it.
             TItem itemToProcess;
@@ -150,8 +128,12 @@ namespace Hik.Threading
                 itemToProcess = _queue.Dequeue();
             }
 
-            //Process the item (by calling the _processMethod delegate)
-            _processMethod(itemToProcess);
+            try
+            {
+                //Process the item (by calling the _processMethod delegate)
+                _processMethod(itemToProcess);
+            }
+            catch { }
 
             //Process next item if available
             lock (_syncObj)
@@ -163,7 +145,7 @@ namespace Hik.Threading
                 }
 
                 //Start a new task
-                _currentProcessTask = Task.Factory.StartNew(ProcessItem);
+                ThreadPool.QueueUserWorkItem(ProcessItem);
             }
         }
 
