@@ -94,14 +94,10 @@ namespace Hik.Threading
             _isRunning = false;
 
             //Clear all incoming messages
-            lock (_syncObj)
+            lock (_syncObj) 
             {
                 _queue.Clear();
             }
-
-            //Wait current processing task to finish
-            while (_isProcessing)
-                Thread.Sleep(50);
         }
 
         #endregion
