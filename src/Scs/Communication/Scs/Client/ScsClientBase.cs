@@ -178,6 +178,20 @@ namespace Hik.Communication.Scs.Client
             Disconnect();
         }
 
+      /// <summary>
+      /// Enable  / disable the pingtimer
+      /// </summary>
+        public bool PingTimer
+        {
+          set
+          {
+            if (value)
+              _pingTimer.Start();
+            else
+              _pingTimer.Stop();
+          }
+        }
+
         /// <summary>
         /// Sends a message to the server.
         /// </summary>
