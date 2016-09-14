@@ -30,11 +30,32 @@ namespace Hik.Communication.Scs.Client.Tcp
         /// <returns>Ready communication channel to communicate</returns>
         protected override ICommunicationChannel CreateCommunicationChannel()
         {
+
+            EndPoint endpoint = null;
+
+            if (IsStringIp(_serverEndPoint.IpAddress))
+            {
+                endpoint = new IPEndPoint(IPAddress.Parse(_serverEndPoint.IpAddress), _serverEndPoint.TcpPort);
+            }
+            else
+            {
+                endpoint = new DnsEndPoint(_serverEndPoint.IpAddress, _serverEndPoint.TcpPort);
+            }
+
             return new TcpCommunicationChannel(
                 TcpHelper.ConnectToServer(
-                    new IPEndPoint(IPAddress.Parse(_serverEndPoint.IpAddress), _serverEndPoint.TcpPort),
+                    endpoint,
                     ConnectTimeout
                     ));
+
+
         }
+
+        private bool IsStringIp(string address)
+        {
+            IPAddress ipAddress = null;
+            return IPAddress.TryParse(address, out ipAddress);
+        }
+
     }
 }
