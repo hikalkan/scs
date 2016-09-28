@@ -1,0 +1,1 @@
+"NuGet.exe" "pack" "..\src\Scs\Scs.csproj" -Properties Configuration=Release -IncludeReferencedProjects -Symbols
