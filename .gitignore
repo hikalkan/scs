@@ -108,3 +108,5 @@ Backup*/
 UpgradeLog*.XML
 
 !nuget.exe
+nuget/push.bat
+nuget/*.nupkg
