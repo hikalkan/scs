@@ -267,7 +267,7 @@ namespace Hik.Communication.Scs.Client
             }
             catch (Exception exception)
             {
-                System.Diagnostics.Trace.WriteLine($"PingTimer_Elapsed: {exception}");
+                System.Diagnostics.Trace.Write($"PingTimer_Elapsed: {exception}");
             }
         }
 

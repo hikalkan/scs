@@ -100,9 +100,10 @@ namespace Hik.Communication.Scs.Client
                 _client.Connect();
                 _reconnectTimer.Stop();
             }
-            catch
+            catch (Exception exception)
             {
                 //No need to catch since it will try to re-connect again
+                System.Diagnostics.Trace.Write($"ReconnectTimer_Elapsed: {exception}");
             }
         }
     }

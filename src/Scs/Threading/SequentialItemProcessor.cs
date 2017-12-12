@@ -116,9 +116,9 @@ namespace Hik.Threading
             {
                 _currentProcessTask.Wait();
             }
-            catch
+            catch (Exception exception)
             {
-
+                System.Diagnostics.Trace.Write($"Stop: {exception}");
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System;
+using System.Net.Sockets;
 using System.Threading;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 
@@ -77,9 +78,9 @@ namespace Hik.Communication.Scs.Communication.Channels.Tcp
             {
                 _listenerSocket.Stop();
             }
-            catch
+            catch (Exception exception)
             {
-
+                System.Diagnostics.Trace.Write($"StopSocket: {exception}");
             }
         }
 
@@ -113,9 +114,9 @@ namespace Hik.Communication.Scs.Communication.Channels.Tcp
                     {
                         StartSocket();
                     }
-                    catch
+                    catch (Exception exception)
                     {
-
+                        System.Diagnostics.Trace.Write($"DoListenAsThread: {exception}");
                     }
                 }
             }
