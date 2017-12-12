@@ -1,7 +1,7 @@
 ﻿using System;
 using Hik.Communication.Scs.Communication;
-using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Communication.Channels;
+using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Communication.Protocols;
 using Hik.Threading;
 
@@ -122,7 +122,7 @@ namespace Hik.Communication.Scs.Client
         private readonly Timer _pingTimer;
 
         #endregion
-        
+
         #region Constructor
 
         /// <summary>
@@ -265,9 +265,9 @@ namespace Hik.Communication.Scs.Client
 
                 _communicationChannel.SendMessage(new ScsPingMessage());
             }
-            catch
+            catch (Exception exception)
             {
-
+                System.Diagnostics.Trace.Write($"PingTimer_Elapsed: {exception}");
             }
         }
 

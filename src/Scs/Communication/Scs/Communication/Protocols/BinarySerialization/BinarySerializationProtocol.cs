@@ -60,8 +60,8 @@ namespace Hik.Communication.Scs.Communication.Protocols.BinarySerialization
         public byte[] GetBytes(IScsMessage message)
         {
             //Serialize the message to a byte array
-            var serializedMessage = SerializeMessage(message); 
-           
+            var serializedMessage = SerializeMessage(message);
+
             //Check for message length
             var messageLength = serializedMessage.Length;
             if (messageLength > MaxMessageLength)
@@ -155,16 +155,23 @@ namespace Hik.Communication.Scs.Communication.Protocols.BinarySerialization
             {
                 //Go to head of the stream
                 deserializeMemoryStream.Position = 0;
-                
+
                 //Deserialize the message
                 var binaryFormatter = new BinaryFormatter
                 {
                     AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple,
                     Binder = new DeserializationAppDomainBinder()
                 };
-                
-                //Return the deserialized message
-                return (IScsMessage) binaryFormatter.Deserialize(deserializeMemoryStream);
+
+                try
+                {
+                    //Return the deserialized message
+                    return (IScsMessage)binaryFormatter.Deserialize(deserializeMemoryStream);
+                }
+                catch (Exception exception)
+                {
+                    throw new SerializationException("error while deserializing message", exception);
+                }
             }
         }
 
@@ -233,7 +240,7 @@ namespace Hik.Communication.Scs.Communication.Protocols.BinarySerialization
             //Re-create the receive memory stream and write remaining bytes
             _receiveMemoryStream = new MemoryStream();
             _receiveMemoryStream.Write(remainingBytes, 0, remainingBytes.Length);
-            
+
             //Return true to re-call this method to try to read next message
             return (remainingBytes.Length > 4);
         }

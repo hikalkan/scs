@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization;
+
 using Hik.Communication.Scs.Communication.EndPoints;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.Scs.Communication.Messages;
@@ -100,9 +102,9 @@ namespace Hik.Communication.Scs.Communication.Channels.Tcp
 
                 _clientSocket.Dispose();
             }
-            catch
+            catch (Exception exception)
             {
-
+                System.Diagnostics.Trace.Write($"Disconnect: {exception}");
             }
 
             CommunicationState = CommunicationStates.Disconnected;
@@ -162,7 +164,7 @@ namespace Hik.Communication.Scs.Communication.Channels.Tcp
         /// <param name="ar">Asyncronous call result</param>
         private void ReceiveCallback(IAsyncResult ar)
         {
-            if(!_running)
+            if (!_running)
             {
                 return;
             }
@@ -179,13 +181,19 @@ namespace Hik.Communication.Scs.Communication.Channels.Tcp
                     var receivedBytes = new byte[bytesRead];
                     Array.Copy(_buffer, 0, receivedBytes, 0, bytesRead);
 
-                    //Read messages according to current wire protocol
-                    var messages = WireProtocol.CreateMessages(receivedBytes);
-                    
-                    //Raise MessageReceived event for all received messages
-                    foreach (var message in messages)
+                    try
                     {
-                        OnMessageReceived(message);
+                        //Read messages according to current wire protocol
+                        var messages = WireProtocol.CreateMessages(receivedBytes);
+                        //Raise MessageReceived event for all received messages
+                        foreach (var message in messages)
+                        {
+                            OnMessageReceived(message);
+                        }
+                    }
+                    catch (SerializationException ex)
+                    {
+                        System.Diagnostics.Trace.Write($"Error while deserializing message: {ex}");
                     }
                 }
                 else
@@ -199,12 +207,13 @@ namespace Hik.Communication.Scs.Communication.Channels.Tcp
                     _clientSocket.BeginReceive(_buffer, 0, _buffer.Length, 0, new AsyncCallback(ReceiveCallback), null);
                 }
             }
-            catch
+            catch (Exception exception)
             {
+                System.Diagnostics.Trace.Write($"ReceiveCallback: {exception}");
                 Disconnect();
             }
         }
-        
+
         #endregion
     }
 }

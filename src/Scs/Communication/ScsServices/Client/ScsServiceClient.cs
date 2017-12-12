@@ -165,7 +165,7 @@ namespace Hik.Communication.ScsServices.Client
             }
 
             //Check client object.
-            if(_clientObject == null)
+            if (_clientObject == null)
             {
                 SendInvokeResponse(invokeMessage, null, new ScsRemoteException("Client does not wait for method invocations by server."));
                 return;
@@ -213,12 +213,12 @@ namespace Hik.Communication.ScsServices.Client
                         RemoteException = exception
                     });
             }
-            catch
+            catch (Exception ex)
             {
-
+                System.Diagnostics.Trace.Write($"SendInvokeResponse: {ex}");
             }
         }
-        
+
         /// <summary>
         /// Handles Connected event of _client object.
         /// </summary>
