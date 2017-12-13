@@ -170,6 +170,7 @@ namespace Hik.Communication.Scs.Communication.Protocols.BinarySerialization
                 }
                 catch (Exception exception)
                 {
+                    Reset(); // reset the received memory stream before the exception is rethrown - otherwise the same erroneous message is received again and again
                     throw new SerializationException("error while deserializing message", exception);
                 }
             }
@@ -232,6 +233,7 @@ namespace Hik.Communication.Scs.Communication.Protocols.BinarySerialization
 
             //Read bytes of serialized message and deserialize it
             var serializedMessageBytes = ReadByteArray(_receiveMemoryStream, messageLength);
+
             messages.Add(DeserializeMessage(serializedMessageBytes));
 
             //Read remaining bytes to an array
