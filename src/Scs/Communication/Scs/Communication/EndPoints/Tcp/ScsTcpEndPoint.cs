@@ -14,7 +14,7 @@ namespace Hik.Communication.Scs.Communication.EndPoints.Tcp
     /// <summary>
     /// Represens a TCP end point in SCS.
     /// </summary>
-    public class ScsTcpEndPoint : ScsEndPoint
+    public sealed class ScsTcpEndPoint : ScsEndPoint
     {
         ///<summary>
         /// IP address of the server.
