@@ -102,6 +102,15 @@
     <Compile Include="Communication\Scs\Server\ScsServerManager.cs" />
     <Compile Include="Communication\Scs\Server\ServerClientEventArgs.cs" />
     <Compile Include="Communication\Scs\Server\Tcp\ScsTcpServer.cs" />
+    <Compile Include="Communication\SslScsServices\Client\SslScsClientServiceBuilder.cs" />
+    <Compile Include="Communication\SslScsServices\Service\SslScsServiceBuilder.cs" />
+    <Compile Include="Communication\SslScs\Authentication\SslScsAuthMode.cs" />
+    <Compile Include="Communication\SslScs\Channel\Tcp\TcpSslCommunicationChannel.cs" />
+    <Compile Include="Communication\SslScs\Channel\Tcp\TcpSslConnectionListener.cs" />
+    <Compile Include="Communication\SslScs\Client\SslScsClientFactory.cs" />
+    <Compile Include="Communication\SslScs\Client\Tcp\SslScsTcpClient.cs" />
+    <Compile Include="Communication\SslScs\Server\SslScsServerFactory.cs" />
+    <Compile Include="Communication\SslScs\Server\Tcp\SslScsTcpServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Threading\SequentialItemProcessor.cs" />
     <Compile Include="Threading\Timer.cs" />
@@ -124,6 +133,7 @@
   <ItemGroup>
     <Content Include="Changes.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
