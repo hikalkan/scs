@@ -153,14 +153,10 @@ namespace Hik.Communication.SslScs.Channel.Tcp
 
         #region Private methods
 
-        /// <summary>
-        /// This buffer is used to resolve an issue with EndRead function for _sslStream
-        /// </summary>
-        private byte _secondBuffer;
-        private bool _secondBufferFlag;
+
         /// <summary>
         /// This method is used as callback method in _clientSocket's BeginReceive method.
-        /// It reveives bytes from socker.
+        /// It reveives bytes from socket.
         /// </summary>
         /// <param name="ar">Asyncronous call result</param>
         private void ReceiveCallback(IAsyncResult ar)
@@ -172,40 +168,28 @@ namespace Hik.Communication.SslScs.Channel.Tcp
 
             try
             {
-                //TODO:: There is an issue with the EndRead, where it reads only 1 byte of the first message then reads the rest of the message
-                //this should be fixed. 
                 //Get received bytes count
                 var bytesRead = _sslStream.EndRead(ar);
 
                 if (bytesRead > 0)
-                {
-                    if (bytesRead == 1)
+                {              
+                    LastReceivedMessageTime = DateTime.Now;
+                    //Copy received bytes to a new byte array
+                    var receivedBytes = new byte[bytesRead];
+                    Array.Copy(_buffer, 0, receivedBytes,  0, bytesRead);
+                    try
                     {
-                        _secondBuffer = _buffer[0];
-                        _secondBufferFlag = true;
+                        //Read messages according to current wire protocol
+                        var messages = WireProtocol.CreateMessages(receivedBytes);
+                        //Raise MessageReceived event for all received messages
+                        foreach (var message in messages)
+                        {
+                            OnMessageReceived(message);
+                        }
                     }
-                    else
+                    catch (SerializationException ex)
                     {
-                        LastReceivedMessageTime = DateTime.Now;
-                        //Copy received bytes to a new byte array
-                        var receivedBytes = new byte[(_secondBufferFlag) ? bytesRead + 1 : bytesRead];
-                        if (_secondBufferFlag) receivedBytes[0] = _secondBuffer;
-                        Array.Copy(_buffer, 0, receivedBytes, (_secondBufferFlag) ? 1 : 0, bytesRead);
-                        _secondBufferFlag = false;
-                        try
-                        {
-                            //Read messages according to current wire protocol
-                            var messages = WireProtocol.CreateMessages(receivedBytes);
-                            //Raise MessageReceived event for all received messages
-                            foreach (var message in messages)
-                            {
-                                OnMessageReceived(message);
-                            }
-                        }
-                        catch (SerializationException ex)
-                        {
-                            Trace.Write($"Error while deserializing message: {ex}");
-                        }
+                        Trace.Write($"Error while deserializing message: {ex}");
                     }
                 }
                 else

@@ -193,6 +193,14 @@ namespace Hik.Communication.Scs.Communication.Protocols.BinarySerialization
             //Go to the begining of the stream
             _receiveMemoryStream.Position = 0;
 
+            //An issue with the SSLStream.EndRead is that it reads at first one byte only
+            //So, if the length is zero then set the position at 1 then return false so it can be parsed in the next iteration
+            if (_receiveMemoryStream.Length == 1)
+            {
+                _receiveMemoryStream.Position = 1;
+                return false;
+            }
+
             //If stream has less than 4 bytes, that means we can not even read length of the message
             //So, return false to wait more bytes from remore application.
             if (_receiveMemoryStream.Length < 4)
