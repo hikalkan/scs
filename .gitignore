@@ -110,3 +110,7 @@ UpgradeLog*.XML
 !nuget.exe
 nuget/push.bat
 nuget/*.nupkg
+*.ide-shm
+*.lock
+*.ide-wal
+*.ide

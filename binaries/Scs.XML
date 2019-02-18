@@ -2569,12 +2569,12 @@
             </summary>
             <returns>Created listener object</returns>
         </member>
-        <member name="T:Hik.Communication.SslScsServices.Client.SslScsClientServiceBuilder">
+        <member name="T:Hik.Communication.SslScsServices.Client.SslScsServiceClientBuilder">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Hik.Communication.SslScsServices.Client.SslScsClientServiceBuilder.CreateSslClient``1(Hik.Communication.Scs.Communication.EndPoints.ScsEndPoint,System.Security.Cryptography.X509Certificates.X509Certificate2,System.String,Hik.Communication.SslScs.Authentication.SslScsAuthMode,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Object)">
+        <member name="M:Hik.Communication.SslScsServices.Client.SslScsServiceClientBuilder.CreateSslClient``1(Hik.Communication.Scs.Communication.EndPoints.ScsEndPoint,System.Security.Cryptography.X509Certificates.X509Certificate2,System.String,Hik.Communication.SslScs.Authentication.SslScsAuthMode,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Object)">
             <summary>
             SSL
             </summary>
@@ -2677,15 +2677,10 @@
             </summary>
             <param name="message">Message to be sent</param>
         </member>
-        <member name="F:Hik.Communication.SslScs.Channel.Tcp.TcpSslCommunicationChannel._secondBuffer">
-            <summary>
-            This buffer is used to resolve an issue with EndRead function for _sslStream
-            </summary>
-        </member>
         <member name="M:Hik.Communication.SslScs.Channel.Tcp.TcpSslCommunicationChannel.ReceiveCallback(System.IAsyncResult)">
             <summary>
             This method is used as callback method in _clientSocket's BeginReceive method.
-            It reveives bytes from socker.
+            It reveives bytes from socket.
             </summary>
             <param name="ar">Asyncronous call result</param>
         </member>

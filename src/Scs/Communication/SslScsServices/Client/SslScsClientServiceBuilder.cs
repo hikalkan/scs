@@ -12,7 +12,7 @@ namespace Hik.Communication.SslScsServices.Client
     /// <summary>
     /// 
     /// </summary>
-    public class SslScsClientServiceBuilder
+    public class SslScsServiceClientBuilder
     {
         /// <summary>
         /// SSL
