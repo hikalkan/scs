@@ -1751,6 +1751,12 @@
             </summary>
             <returns>A string to represents this object</returns>
         </member>
+        <member name="M:Hik.Communication.Scs.Communication.Messages.ScsTextMessage.op_Explicit(Hik.Communication.Scs.Communication.Messages.ScsPingMessage)~Hik.Communication.Scs.Communication.Messages.ScsTextMessage">
+            <summary>
+            Created this method because casting SCSPingMessage will throw exception when caste to ScsTextMessage
+            </summary>
+            <param name="v"></param>
+        </member>
         <member name="T:Hik.Communication.Scs.Communication.Protocols.BinarySerialization.BinarySerializationProtocol">
             <summary>
             Default communication protocol between server and clients to send and receive a message.
