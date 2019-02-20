@@ -130,16 +130,17 @@ namespace Hik.Communication.SslScs.Client.Tcp
             {
                 case SslScsAuthMode.ServerAuth:
                     return _serverCertificate.GetPublicKeyString() == certificate.GetPublicKeyString();
-                    break;
+                  
                 case SslScsAuthMode.MutualAuth:
-                    if (sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors)
-                    {
-                        return _serverCertificate.GetCertHashString().Equals(certificate.GetCertHashString());
-                    }
-                    else
-                    {
-                        return (sslPolicyErrors == SslPolicyErrors.None);
-                    }
+                    return _serverCertificate.GetCertHashString().Equals(certificate.GetCertHashString());
+                    //if (sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors)
+                    //{
+                    //    return _serverCertificate.GetCertHashString().Equals(certificate.GetCertHashString());
+                    //}
+                    //else
+                    //{
+                    //    return (sslPolicyErrors == SslPolicyErrors.None);
+                    //}
                 default:
                     throw new ArgumentOutOfRangeException();
             }
