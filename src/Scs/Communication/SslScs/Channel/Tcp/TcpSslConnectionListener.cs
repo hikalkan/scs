@@ -115,12 +115,13 @@ namespace Hik.Communication.SslScs.Channel.Tcp
         {
             while (_running)
             {
+                SslStream sslStream = null;
                 try
                 {
                     var client = _listenerSocket.AcceptTcpClient();
                     if (client.Connected)
                     {
-                        var sslStream = new SslStream(client.GetStream(), false, _validationCallback ?? ValidateCertificate);
+                         sslStream = new SslStream(client.GetStream(), false, _validationCallback ?? ValidateCertificate);
                         switch (_authMode)
                         {
                             case SslScsAuthMode.ServerAuth:
@@ -137,6 +138,7 @@ namespace Hik.Communication.SslScs.Channel.Tcp
                 }
                 catch
                 {
+                    sslStream?.Close();
                     //Disconnect, wait for a while and connect again.
                     StopSocket();
                     Thread.Sleep(1000);

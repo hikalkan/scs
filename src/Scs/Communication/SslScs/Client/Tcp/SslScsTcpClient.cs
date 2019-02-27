@@ -86,14 +86,13 @@ namespace Hik.Communication.SslScs.Client.Tcp
         protected override ICommunicationChannel CreateCommunicationChannel()
         {
             var client = new TcpClient();
-            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
+           SslStream sslStream=null;
             try
             {
                 client = new TcpClient();
                 client.Connect(new IPEndPoint(IPAddress.Parse(_serverEndPoint.IpAddress), _serverEndPoint.TcpPort));
 
-                var sslStream = new SslStream(client.GetStream(), false,
+                 sslStream = new SslStream(client.GetStream(), false,
                     _validateCertificate ?? DefaultValidateCertificate,
                     SelectLocalCertificate);
 
@@ -114,8 +113,10 @@ namespace Hik.Communication.SslScs.Client.Tcp
 
                 return new TcpSslCommunicationChannel(_serverEndPoint, client, sslStream);
             }
-            catch (AuthenticationException)
+            catch (AuthenticationException )
             {
+                sslStream?.Close();
+
                 client.Close();
                 throw;
             }
