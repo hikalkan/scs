@@ -66,10 +66,10 @@ namespace Hik.Communication.ScsServices.Service
         /// </summary>
         private readonly RequestReplyMessenger<IScsServerClient> _requestReplyMessenger;
 
-        ///// <summary>
-        ///// Last created proxy object to invoke remote medhods.
-        ///// </summary>
-        //private RealProxy _realProxy;
+        /// <summary>
+        /// Last created proxy object to invoke remote medhods.
+        /// </summary>
+        private IInterceptor _realProxy;
 
         #endregion
 
@@ -106,9 +106,8 @@ namespace Hik.Communication.ScsServices.Service
         /// <returns>Client interface</returns>
         public T GetClientProxy<T>() where T : class
         {
-            return ProxyGenerator.Create<T>(new RemoteInvokeProxy<T, IScsServerClient>(_requestReplyMessenger));
-
-            //_realProxy = new RemoteInvokeProxy<T, IScsServerClient>(_requestReplyMessenger);
+            _realProxy = new RemoteInvokeProxy<T, IScsServerClient>(_requestReplyMessenger);
+            return ProxyGenerator.Create<T>(_realProxy);
             //return (T)_realProxy.GetTransparentProxy();
         }
 
