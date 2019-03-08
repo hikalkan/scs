@@ -23,3 +23,8 @@ SCS - TCP Server/Client Communication and RMI Framework
 You can download SCS binaries and source codes directly from here (Github).
 
 If you're using Visual Studio, you can get from Nuget (https://www.nuget.org/packages/SCS).
+
+### 更新日志
+
+- 2019-03-08：参考[CoreProxy](https://github.com/ElderJames/CoreProxy)将SCS升级到.net standard 2.0。
+
