@@ -87,11 +87,6 @@ namespace Hik.Communication.Scs.Communication.Channels.Tcp
         /// </summary>
         public override void Disconnect()
         {
-            if (CommunicationState != CommunicationStates.Connected)
-            {
-                return;
-            }
-
             _running = false;
             try
             {
