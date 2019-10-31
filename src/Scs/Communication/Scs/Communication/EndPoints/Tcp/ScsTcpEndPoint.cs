@@ -32,6 +32,7 @@ namespace Hik.Communication.Scs.Communication.EndPoints.Tcp
         /// <param name="tcpPort">Listening TCP Port for incoming connection requests on server</param>
         public ScsTcpEndPoint(int tcpPort)
         {
+            //this is called when the server is first created
             TcpPort = tcpPort;
         }
 
@@ -70,6 +71,11 @@ namespace Hik.Communication.Scs.Communication.EndPoints.Tcp
 
         internal override IScsServer CreateSslServer(X509Certificate serverCert, List<X509Certificate2> clientCerts, SslScsAuthMode authMode)
         {
+            if (string.IsNullOrEmpty(IpAddress))
+            {
+                throw new Exception("IP Address is empty in endpoint. SSLscs error (CreateSslServer)");
+            }
+            //this is called when the server is created
             return new ScsSslTcpServer(this, serverCert, clientCerts, authMode);
         }
 
@@ -94,6 +100,10 @@ namespace Hik.Communication.Scs.Communication.EndPoints.Tcp
         /// <returns>String representation of this end point object</returns>
         public override string ToString()
         {
+            if (string.IsNullOrEmpty(IpAddress))
+            {
+                throw  new Exception("IP Address is empty in endpoint. SSLscs error 0x001");
+            }
             return string.IsNullOrEmpty(IpAddress) ? ("tcp://" + TcpPort) : ("tcp://" + IpAddress + ":" + TcpPort);
         }
     }

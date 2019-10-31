@@ -133,7 +133,7 @@ namespace Hik.Communication.SslScs.Channel.Tcp
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }
-                        OnCommunicationChannelConnected(new TcpSslCommunicationChannel(_endPoint, client, sslStream));
+                        OnCommunicationChannelConnected(new TcpSslCommunicationChannel( client, sslStream));
                     }
                 }
                 catch

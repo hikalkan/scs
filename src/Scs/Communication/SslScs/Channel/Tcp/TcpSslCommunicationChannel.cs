@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Runtime.Serialization;
@@ -66,12 +67,14 @@ namespace Hik.Communication.SslScs.Channel.Tcp
         /// <summary>
         /// Creates a new TcpCommunicationChannel object.
         /// </summary>
-        public TcpSslCommunicationChannel(ScsTcpEndPoint endPoint, TcpClient client, SslStream sslStream)
+        public TcpSslCommunicationChannel(TcpClient client, SslStream sslStream)
         {
             _client = client;
             _client.NoDelay = true;
             _sslStream = sslStream;
-            _remoteEndPoint = endPoint;
+            var endpoint = (IPEndPoint) client.Client.RemoteEndPoint;
+
+            _remoteEndPoint = new ScsTcpEndPoint(endpoint.Address.ToString(), endpoint.Port);
             _buffer = new byte[ReceiveBufferSize];
             _syncLock = new object();
         }

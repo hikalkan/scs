@@ -111,7 +111,7 @@ namespace Hik.Communication.SslScs.Client.Tcp
                 }
 
 
-                return new TcpSslCommunicationChannel(_serverEndPoint, client, sslStream);
+                return new TcpSslCommunicationChannel( client, sslStream);
             }
             catch (AuthenticationException )
             {
