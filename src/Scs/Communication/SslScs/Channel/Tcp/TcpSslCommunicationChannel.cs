@@ -72,7 +72,7 @@ namespace Hik.Communication.SslScs.Channel.Tcp
             _client = client;
             _client.NoDelay = true;
             _sslStream = sslStream;
-            var endpoint = (IPEndPoint) client.Client.RemoteEndPoint;
+            var endpoint = (IPEndPoint) client.Client.RemoteEndPoint; 
 
             _remoteEndPoint = new ScsTcpEndPoint(endpoint.Address.ToString(), endpoint.Port);
             _buffer = new byte[ReceiveBufferSize];
