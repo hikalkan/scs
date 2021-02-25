@@ -54,5 +54,14 @@ namespace Hik.Communication.Scs.Communication.Messages
                        ? string.Format("ScsTextMessage [{0}]: {1}", MessageId, Text)
                        : string.Format("ScsTextMessage [{0}] Replied To [{1}]: {2}", MessageId, RepliedMessageId, Text);
         }
+
+        /// <summary>
+        /// Created this method because casting SCSPingMessage will throw exception when caste to ScsTextMessage
+        /// </summary>
+        /// <param name="v"></param>
+        public static explicit operator ScsTextMessage(ScsPingMessage v)
+        {
+            return new ScsTextMessage(v.RepliedMessageId);
+        }
     }
 }

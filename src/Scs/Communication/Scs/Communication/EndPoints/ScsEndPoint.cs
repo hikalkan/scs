@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.Scs.Server;
+using Hik.Communication.SslScs.Authentication;
 
 namespace Hik.Communication.Scs.Communication.EndPoints
 {
@@ -59,9 +62,21 @@ namespace Hik.Communication.Scs.Communication.EndPoints
         internal abstract IScsServer CreateServer();
 
         /// <summary>
+        /// Creates a SSL Scs Server that uses this end point to listen incoming connections.
+        /// </summary>
+        /// <returns>Scs Server</returns>
+        internal abstract IScsServer CreateSslServer(X509Certificate serverCert, List<X509Certificate2> clientCerts, SslScsAuthMode authMode);
+
+        /// <summary>
         /// Creates a Scs Server that uses this end point to connect to server.
         /// </summary>
         /// <returns>Scs Client</returns>
         internal abstract IScsClient CreateClient();
+
+        /// <summary>
+        /// Creates a Scs Server that uses this end point to connect to server.
+        /// </summary>
+        /// <returns>Scs Client</returns>
+        internal abstract IScsClient CreateSslClient(X509Certificate2 serverCertificate, SslScsAuthMode authMode, X509Certificate clientCertificate, string sslHostAddress);
     }
 }

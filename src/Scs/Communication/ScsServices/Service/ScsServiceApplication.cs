@@ -146,6 +146,7 @@ namespace Hik.Communication.ScsServices.Service
             requestReplyMessenger.MessageReceived += Client_MessageReceived;
             requestReplyMessenger.Start();
 
+          
             var serviceClient = ScsServiceClientFactory.CreateServiceClient(e.Client, requestReplyMessenger);
             _serviceClients[serviceClient.ClientId] = serviceClient;
             OnClientConnected(serviceClient);
